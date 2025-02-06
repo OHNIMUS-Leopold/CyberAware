@@ -3,11 +3,9 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 
-// Import de la configuration de la base de données
-// import db from "./db/database.js";
-
 // Import des routes
-// import authRoutes from "./routes/authRoutes.js";
+import participantsRoutes from "./routes/participantsRoutes";
+import sessionRoutes from "./routes/sessionRoutes";
 
 
 // Initialisation de l'application
@@ -20,7 +18,8 @@ app.use(express.json());
 app.use(cookieParser());
 
 // Utilisation des routes d'authentification
-// app.use("/auth", authRoutes);
+app.use("/participants", participantsRoutes);
+app.use("/session", sessionRoutes);
 
 
 // Démarrage du serveur
