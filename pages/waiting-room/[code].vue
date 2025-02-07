@@ -6,7 +6,7 @@
     <div v-if="isModerator">
       <h2>Vous êtes le modérateur</h2>
       <ul>
-        <li v-for="(pseudo, index) in participants" :key="index">{{ pseudo }}</li>
+        <li v-for="(participant, index) in participants" :key="index">{{ participant }}</li>
       </ul>
       <button class="bg-red-500 text-white px-4 py-2 rounded" @click="closeSession">Clore la session</button>
     </div>
@@ -25,7 +25,7 @@
         <button class="bg-blue-500 text-white px-4 py-2 rounded" @click="setPseudo">Rejoindre</button>
       </div>
       <ul v-else>
-        <li v-for="(pseudo, index) in participants" :key="index">{{ pseudo }}</li>
+        <li v-for="(participant, index) in participants" :key="index">{{ participant }}</li>
       </ul>
     </div>
   </div>
@@ -139,7 +139,7 @@ const checkSessionStatus = async () => {
 };
 
 // Fonction de polling pour vérifier l'état de la session
-let pollingInterval: any = null;
+let pollingInterval: NodeJS.Timeout | null = null;
 const startPolling = () => {
   pollingInterval = setInterval(checkSessionStatus, 5000); // Vérifier toutes les 5 secondes
 };
