@@ -1,10 +1,11 @@
-import sqlite3 from "sqlite3";
+// server/db/database.ts
+import sqlite3 from 'sqlite3';
 
-const db = new sqlite3.Database("./server/api/db/db.db", (err) => {
+const db = new sqlite3.Database('./server/db/db.db', (err) => {
   if (err) {
-    console.error("erreur de connexion à la database:", err);
+    console.error('Erreur de connexion à la database:', err);
   } else {
-    console.log("connecté à la database");
+    console.log('Connecté à la database');
     initDatabase();
   }
 });
@@ -17,7 +18,7 @@ function initDatabase() {
       CREATE TABLE IF NOT EXISTS sessions (
         code TEXT PRIMARY KEY,
         moderator TEXT,
-        status TEXT DEFAULT 'open', -- Ajout de la colonne status
+        status TEXT DEFAULT 'open',
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP
       )
     `);
@@ -34,5 +35,4 @@ function initDatabase() {
   });
 }
 
-// Export de la base de données
 export default db;

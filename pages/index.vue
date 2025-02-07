@@ -24,13 +24,17 @@
   </div>
 </template>
 
-
 <script setup lang="ts">
-
 const router = useRouter();
 const sessionCode = ref('');
-const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
+const { public: { apiBaseUrl } } = useRuntimeConfig();
 
+// Définir un type pour la réponse de l'API
+interface ApiResponse {
+  success: boolean;
+  error?: string;
+  participants?: string[];
+}
 
 // Fonction pour générer un code aléatoire
 const generateCode = () => {
@@ -46,18 +50,15 @@ const generateCode = () => {
 const createSession = async () => {
   const code = generateCode();
   try {
-    const response = await fetch(`${apiBaseUrl}/session/create-session`, {
+    const data = await $fetch<ApiResponse>(`${apiBaseUrl}/api/session/create-session`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ code }),
+      body: { code },
     });
-
-    const data = await response.json();
 
     if (data.success) {
       localStorage.setItem('role', 'moderator');
       localStorage.setItem('sessionCode', code);
-      router.push(`/waiting-room/${code}`); 
+      router.push(`/waiting-room/${code}`);
     } else {
       alert(data.error || 'Erreur lors de la création de la session.');
     }
@@ -75,18 +76,15 @@ const joinSession = async () => {
   }
 
   try {
-    const response = await fetch(`${apiBaseUrl}/session/check-session`, {
+    const data = await $fetch<ApiResponse>(`${apiBaseUrl}/api/session/check-session`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ code: sessionCode.value }),
+      body: { code: sessionCode.value },
     });
-
-    const data = await response.json();
 
     if (data.success) {
       localStorage.setItem('role', 'participant');
       localStorage.setItem('sessionCode', sessionCode.value);
-      router.push(`/waiting-room/${sessionCode.value}`); 
+      router.push(`/waiting-room/${sessionCode.value}`);
     } else {
       alert(data.error || 'Session non trouvée ou fermée.');
     }
@@ -95,5 +93,4 @@ const joinSession = async () => {
     alert('Une erreur est survenue.');
   }
 };
-
 </script>
