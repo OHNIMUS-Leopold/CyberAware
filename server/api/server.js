@@ -31,5 +31,3 @@ app.use("/session", sessionRoutes);
 app.listen(PORT, () => {
     console.log(`${apiBaseUrl}`);
 });
-
-export default app;
