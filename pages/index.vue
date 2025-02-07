@@ -29,7 +29,6 @@
 
 const router = useRouter();
 const sessionCode = ref('');
-const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 
 
 // Fonction pour générer un code aléatoire
@@ -46,7 +45,7 @@ const generateCode = () => {
 const createSession = async () => {
   const code = generateCode();
   try {
-    const response = await fetch(`${apiBaseUrl}/session/create-session`, {
+    const response = await fetch('http://localhost:4000/session/create-session', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ code }),
@@ -75,7 +74,7 @@ const joinSession = async () => {
   }
 
   try {
-    const response = await fetch(`${apiBaseUrl}/session/check-session`, {
+    const response = await fetch('http://localhost:4000/session/check-session', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ code: sessionCode.value }),

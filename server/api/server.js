@@ -8,14 +8,14 @@ import participantsRoutes from "./routes/participantsRoutes";
 import sessionRoutes from "./routes/sessionRoutes";
 
 
-// const apiBaseUrl = process.env.NODE_ENV === 'production' 
-//   ? process.env.NUXT_PUBLIC_API_BASE_URL 
-//   : 'http://localhost:4000/';
+const apiBaseUrl = process.env.NODE_ENV === 'production' 
+  ? process.env.NUXT_PUBLIC_API_BASE_URL 
+  : 'http://localhost:4000/';
 
   
 // Initialisation de l'application
 const app = express();
-const PORT = process.env.PORT || 4000;
+const PORT = 4000;
 
 // Middleware
 app.use(cors());
@@ -28,10 +28,8 @@ app.use("/session", sessionRoutes);
 
 
 // Démarrage du serveur
-if (process.env.NODE_ENV !== 'production') {
-  app.listen(PORT, () => {
-    console.log('http://localhost:4000/');
-  });
-}
+app.listen(PORT, () => {
+    console.log(`${apiBaseUrl}`);
+});
 
 export default app;

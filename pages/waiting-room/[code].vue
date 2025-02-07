@@ -43,13 +43,12 @@ const pseudo = ref('');
 const pseudoChosen = ref(false);
 const participants = ref([]);
 const isSessionClosed = ref(false);
-const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
 
 
 // Charger les participants en temps réel
 const fetchParticipants = async () => {
   try {
-    const response = await fetch(`${apiBaseUrl}/participants/get-participants?code=${sessionCode.value}`);
+    const response = await fetch(`http://localhost:4000/participants/get-participants?code=${sessionCode.value}`);
     const data = await response.json();
     participants.value = data.participants || [];
   } catch (error) {
@@ -74,7 +73,7 @@ const setPseudo = async () => {
   try {
     pseudoChosen.value = true;
     // Vérification et enregistrement du pseudo
-    const response = await fetch(`${apiBaseUrl}/participants/set-pseudo`, {
+    const response = await fetch('http://localhost:4000/participants/set-pseudo', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ pseudo: pseudo.value, code: router.currentRoute.value.params.code }),
@@ -96,7 +95,7 @@ const setPseudo = async () => {
 // Fonction pour fermer la session
 const closeSession = async () => {
   try {
-    const response = await fetch(`${apiBaseUrl}/session/close-session`, {
+    const response = await fetch('http://localhost:4000/session/close-session', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ code: sessionCode.value }),
@@ -120,7 +119,7 @@ const closeSession = async () => {
 // Fonction pour vérifier si la session est fermée et informer tous les participants
 const checkSessionStatus = async () => {
   try {
-    const response = await fetch(`${apiBaseUrl}/session/check-session`, {
+    const response = await fetch('http://localhost:4000/session/check-session', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ code: sessionCode.value }),
