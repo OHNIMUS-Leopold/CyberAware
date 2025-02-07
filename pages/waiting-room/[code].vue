@@ -31,9 +31,7 @@
   </div>
 </template>
 
-
 <script setup lang="ts">
-
 const route = useRoute();
 const router = useRouter();
 
@@ -41,23 +39,31 @@ const sessionCode = ref(route.params.code);
 const isModerator = ref(localStorage.getItem('role') === 'moderator');
 const pseudo = ref('');
 const pseudoChosen = ref(false);
-const participants = ref([]);
+const participants = ref<string[]>([]);
 const isSessionClosed = ref(false);
-const apiBaseUrl = useRuntimeConfig().public.apiBaseUrl;
+const { public: { apiBaseUrl } } = useRuntimeConfig();
 
+// Définir un type pour la réponse de l'API
+interface ApiResponse {
+  success: boolean;
+  error?: string;
+  participants?: string[];
+}
 
 // Charger les participants en temps réel
 const fetchParticipants = async () => {
   try {
-    const response = await fetch(`${apiBaseUrl}/participants/get-participants?code=${sessionCode.value}`);
-    const data = await response.json();
+    const data = await $fetch<ApiResponse>(`${apiBaseUrl}/api/participants/get-participants`, {
+      query: { code: sessionCode.value },
+    });
+
     participants.value = data.participants || [];
   } catch (error) {
     console.error('Erreur lors du chargement des participants:', error);
   }
 };
 
-// Actualisation 
+// Actualisation des participants
 onMounted(() => {
   fetchParticipants();
   const interval = setInterval(fetchParticipants, 5000);
@@ -72,18 +78,14 @@ const setPseudo = async () => {
   }
 
   try {
-    pseudoChosen.value = true;
-    // Vérification et enregistrement du pseudo
-    const response = await fetch(`${apiBaseUrl}/participants/set-pseudo`, {
+    const data = await $fetch<ApiResponse>(`${apiBaseUrl}/api/participants/set-pseudo`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ pseudo: pseudo.value, code: router.currentRoute.value.params.code }),
+      body: { pseudo: pseudo.value, code: sessionCode.value },
     });
 
-    const data = await response.json();
-    
     if (data.success) {
-      router.push(`/waiting-room/${router.currentRoute.value.params.code}`);
+      pseudoChosen.value = true;
+      fetchParticipants(); // Recharger la liste des participants
     } else {
       alert(data.error || 'Erreur lors de l\'enregistrement du pseudo.');
     }
@@ -96,18 +98,14 @@ const setPseudo = async () => {
 // Fonction pour fermer la session
 const closeSession = async () => {
   try {
-    const response = await fetch(`${apiBaseUrl}/session/close-session`, {
+    const data = await $fetch<ApiResponse>(`${apiBaseUrl}/api/session/close-session`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ code: sessionCode.value }),
+      body: { code: sessionCode.value },
     });
 
-    const data = await response.json();
-
     if (data.success) {
-      // alert('Session fermée avec succès.');
-      checkSessionStatus();
-      window.location.href = '/';
+      alert('Session fermée avec succès.');
+      router.push('/');
     } else {
       alert(data.error || 'Erreur lors de la fermeture de la session.');
     }
@@ -117,16 +115,13 @@ const closeSession = async () => {
   }
 };
 
-// Fonction pour vérifier si la session est fermée et informer tous les participants
+// Fonction pour vérifier si la session est fermée
 const checkSessionStatus = async () => {
   try {
-    const response = await fetch(`${apiBaseUrl}/session/check-session`, {
+    const data = await $fetch<ApiResponse>(`${apiBaseUrl}/api/session/check-session`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ code: sessionCode.value }),
+      body: { code: sessionCode.value },
     });
-
-    const data = await response.json();
 
     if (!data.success && !isSessionClosed.value) {
       isSessionClosed.value = true;
@@ -135,26 +130,18 @@ const checkSessionStatus = async () => {
     }
   } catch (error) {
     console.error('Erreur lors de la vérification de l\'état de la session:', error);
-    alert('Une erreur est survenue.');
   }
 };
 
-// Fonction de polling pour vérifier l'état de la session
+// Polling pour vérifier l'état de la session
 let pollingInterval: NodeJS.Timeout | null = null;
-const startPolling = () => {
-  pollingInterval = setInterval(checkSessionStatus, 5000); // Vérifier toutes les 5 secondes
-};
+onMounted(() => {
+  pollingInterval = setInterval(checkSessionStatus, 5000);
+});
 
-// Arrêter le polling lorsqu'on quitte la page
 onBeforeUnmount(() => {
   if (pollingInterval) {
     clearInterval(pollingInterval);
   }
 });
-
-// Lancer le polling lors du montage de la page
-onMounted(() => {
-  startPolling();
-});
-
 </script>
