@@ -8,9 +8,9 @@ import participantsRoutes from "./routes/participantsRoutes";
 import sessionRoutes from "./routes/sessionRoutes";
 
 
-const apiBaseUrl = process.env.NODE_ENV === 'production' 
-  ? process.env.NUXT_PUBLIC_API_BASE_URL 
-  : 'http://localhost:4000/';
+// const apiBaseUrl = process.env.NODE_ENV === 'production' 
+//   ? process.env.NUXT_PUBLIC_API_BASE_URL 
+//   : 'http://localhost:4000/';
 
   
 // Initialisation de l'application
@@ -28,6 +28,10 @@ app.use("/session", sessionRoutes);
 
 
 // Démarrage du serveur
-app.listen(PORT, () => {
-    console.log(`${apiBaseUrl}`);
-});
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log('http://localhost:4000/');
+  });
+}
+
+export default app;
