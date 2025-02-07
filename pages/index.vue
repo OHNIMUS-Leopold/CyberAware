@@ -2,21 +2,21 @@
   <div class="flex flex-col items-center justify-center min-h-screen space-y-4">
     <h1 class="text-3xl font-bold">Bienvenue !</h1>
     <div class="flex space-x-4">
-      <button @click="createSession" class="bg-green-500 text-white px-4 py-2 rounded">
+      <button class="bg-green-500 text-white px-4 py-2 rounded" @click="createSession">
         Créer une session
       </button>
 
       <div>
         <label for="sessionCode" class="block mb-2">Code de session :</label>
         <input
-          v-model="sessionCode"
           id="sessionCode"
+          v-model="sessionCode"
           type="text"
           maxlength="6"
           placeholder="Code (ex: ZKA0XI)"
           class="border p-2 rounded mb-2"
-        />
-        <button @click="joinSession" class="bg-blue-500 text-white px-4 py-2 rounded">
+        >
+        <button class="bg-blue-500 text-white px-4 py-2 rounded" @click="joinSession">
           Rejoindre
         </button>
       </div>

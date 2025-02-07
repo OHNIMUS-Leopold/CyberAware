@@ -8,7 +8,7 @@
       <ul>
         <li v-for="(pseudo, index) in participants" :key="index">{{ pseudo }}</li>
       </ul>
-      <button @click="closeSession" class="bg-red-500 text-white px-4 py-2 rounded">Clore la session</button>
+      <button class="bg-red-500 text-white px-4 py-2 rounded" @click="closeSession">Clore la session</button>
     </div>
 
     <div v-else>
@@ -16,13 +16,13 @@
       <div v-if="!pseudoChosen">
         <label for="pseudo">Choisissez un pseudo :</label>
         <input
-          v-model="pseudo"
           id="pseudo"
+          v-model="pseudo"
           type="text"
           placeholder="Votre pseudo"
           class="border p-2 rounded"
-        />
-        <button @click="setPseudo" class="bg-blue-500 text-white px-4 py-2 rounded">Rejoindre</button>
+        >
+        <button class="bg-blue-500 text-white px-4 py-2 rounded" @click="setPseudo">Rejoindre</button>
       </div>
       <ul v-else>
         <li v-for="(pseudo, index) in participants" :key="index">{{ pseudo }}</li>
