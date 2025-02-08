@@ -36,12 +36,19 @@ const route = useRoute();
 const router = useRouter();
 
 const sessionCode = ref(route.params.code);
-const isModerator = ref(localStorage.getItem('role') === 'moderator');
+const isModerator = ref(false);
 const pseudo = ref('');
 const pseudoChosen = ref(false);
 const participants = ref<string[]>([]);
 const isSessionClosed = ref(false);
 const { public: { apiBaseUrl } } = useRuntimeConfig();
+
+// Vérifier si localStorage est disponible et récupérer les valeurs
+if (typeof window !== 'undefined') {
+  isModerator.value = localStorage.getItem('role') === 'moderator';
+  pseudo.value = localStorage.getItem('pseudo') || '';
+  pseudoChosen.value = !!localStorage.getItem('pseudo');
+}
 
 // Charger les participants en temps réel
 const fetchParticipants = async () => {
@@ -78,6 +85,9 @@ const setPseudo = async () => {
     const data = await response.json();
     if (data.success) {
       pseudoChosen.value = true;
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('pseudo', pseudo.value); // Stocker le pseudo dans le localStorage
+      }
       fetchParticipants(); // Recharger la liste des participants
     } else {
       alert(data.error || 'Erreur lors de l\'enregistrement du pseudo.');
