@@ -50,11 +50,13 @@ const generateCode = () => {
 const createSession = async () => {
   const code = generateCode();
   try {
-    const data = await $fetch<ApiResponse>(`${apiBaseUrl}/api/session/create-session`, {
+    const response = await fetch(`${apiBaseUrl}/api/session/create-session`, {
       method: 'POST',
-      body: { code },
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code }),
     });
 
+    const data = await response.json();
     if (data.success) {
       localStorage.setItem('role', 'moderator');
       localStorage.setItem('sessionCode', code);
@@ -76,11 +78,13 @@ const joinSession = async () => {
   }
 
   try {
-    const data = await $fetch<ApiResponse>(`${apiBaseUrl}/api/session/check-session`, {
+    const response = await fetch(`${apiBaseUrl}/api/session/check-session`, {
       method: 'POST',
-      body: { code: sessionCode.value },
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code: sessionCode.value }),
     });
 
+    const data = await response.json();
     if (data.success) {
       localStorage.setItem('role', 'participant');
       localStorage.setItem('sessionCode', sessionCode.value);

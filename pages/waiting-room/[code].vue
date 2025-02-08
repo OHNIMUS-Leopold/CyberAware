@@ -53,10 +53,8 @@ interface ApiResponse {
 // Charger les participants en temps réel
 const fetchParticipants = async () => {
   try {
-    const data = await $fetch<ApiResponse>(`${apiBaseUrl}/api/participants/get-participants`, {
-      query: { code: sessionCode.value },
-    });
-
+    const response = await fetch(`${apiBaseUrl}/api/participants/get-participants?code=${sessionCode.value}`);
+    const data = await response.json();
     participants.value = data.participants || [];
   } catch (error) {
     console.error('Erreur lors du chargement des participants:', error);
@@ -78,11 +76,13 @@ const setPseudo = async () => {
   }
 
   try {
-    const data = await $fetch<ApiResponse>(`${apiBaseUrl}/api/participants/set-pseudo`, {
+    const response = await fetch(`${apiBaseUrl}/api/participants/set-pseudo`, {
       method: 'POST',
-      body: { pseudo: pseudo.value, code: sessionCode.value },
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ pseudo: pseudo.value, code: sessionCode.value }),
     });
 
+    const data = await response.json();
     if (data.success) {
       pseudoChosen.value = true;
       fetchParticipants(); // Recharger la liste des participants
@@ -98,14 +98,17 @@ const setPseudo = async () => {
 // Fonction pour fermer la session
 const closeSession = async () => {
   try {
-    const data = await $fetch<ApiResponse>(`${apiBaseUrl}/api/session/close-session`, {
+    const response = await fetch(`${apiBaseUrl}/api/session/close-session`, {
       method: 'POST',
-      body: { code: sessionCode.value },
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code: sessionCode.value }),
     });
 
+    const data = await response.json();
     if (data.success) {
-      alert('Session fermée avec succès.');
-      router.push('/');
+      // alert('Session fermée avec succès.');
+      checkSessionStatus();
+      // router.push('/');
     } else {
       alert(data.error || 'Erreur lors de la fermeture de la session.');
     }
@@ -118,11 +121,13 @@ const closeSession = async () => {
 // Fonction pour vérifier si la session est fermée
 const checkSessionStatus = async () => {
   try {
-    const data = await $fetch<ApiResponse>(`${apiBaseUrl}/api/session/check-session`, {
+    const response = await fetch(`${apiBaseUrl}/api/session/check-session`, {
       method: 'POST',
-      body: { code: sessionCode.value },
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code: sessionCode.value }),
     });
 
+    const data = await response.json();
     if (!data.success && !isSessionClosed.value) {
       isSessionClosed.value = true;
       alert('Session fermée par le modérateur. Vous allez être redirigé vers l\'accueil.');
