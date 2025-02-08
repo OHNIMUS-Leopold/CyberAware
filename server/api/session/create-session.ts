@@ -1,5 +1,5 @@
-// server/api/session/create-session.ts
-import db from '../../db/database';
+import { db } from '../../utils/firebase';
+import { collection, addDoc } from 'firebase/firestore';
 
 export default defineEventHandler(async (event) => {
   const { code } = await readBody(event);
@@ -8,14 +8,12 @@ export default defineEventHandler(async (event) => {
     return createError({ statusCode: 400, statusMessage: 'Code de session manquant.' });
   }
 
-  return new Promise((resolve, reject) => {
-    db.run('INSERT INTO sessions (code, status) VALUES (?, ?)', [code, 'open'], (err) => {
-      if (err) {
-        console.error('Erreur SQL dans create-session:', err);
-        reject(createError({ statusCode: 500, statusMessage: 'Erreur interne du serveur.' }));
-      } else {
-        resolve({ success: true });
-      }
-    });
-  });
+  try {
+    const sessionsRef = collection(db, 'sessions');
+    await addDoc(sessionsRef, { code, status: 'open', created_at: new Date() });
+    return { success: true };
+  } catch (error) {
+    console.error('Erreur lors de la création de la session:', error);
+    return createError({ statusCode: 500, statusMessage: 'Erreur interne du serveur.' });
+  }
 });

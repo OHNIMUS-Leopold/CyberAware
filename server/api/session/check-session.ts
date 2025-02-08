@@ -1,5 +1,5 @@
-// server/api/session/check-session.ts
-import db from '../../db/database';
+import { db } from '../../utils/firebase';
+import { collection, query, where, getDocs } from 'firebase/firestore';
 
 export default defineEventHandler(async (event) => {
   const { code } = await readBody(event);
@@ -8,16 +8,18 @@ export default defineEventHandler(async (event) => {
     return createError({ statusCode: 400, statusMessage: 'Code de session manquant.' });
   }
 
-  return new Promise((resolve, reject) => {
-    db.get('SELECT * FROM sessions WHERE code = ? AND status = "open"', [code], (err, row) => {
-      if (err) {
-        console.error('Erreur dans check-session:', err);
-        reject(createError({ statusCode: 500, statusMessage: 'Erreur interne du serveur.' }));
-      } else if (row) {
-        resolve({ success: true });
-      } else {
-        resolve({ success: false, error: 'Session non trouvée ou fermée.' });
-      }
-    });
-  });
+  try {
+    const sessionsRef = collection(db, 'sessions');
+    const q = query(sessionsRef, where('code', '==', code), where('status', '==', 'open'));
+    const querySnapshot = await getDocs(q);
+
+    if (querySnapshot.empty) {
+      return { success: false, error: 'Session non trouvée ou fermée.' };
+    } else {
+      return { success: true };
+    }
+  } catch (error) {
+    console.error('Erreur lors de la vérification de la session:', error);
+    return createError({ statusCode: 500, statusMessage: 'Erreur interne du serveur.' });
+  }
 });

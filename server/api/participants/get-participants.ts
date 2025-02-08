@@ -1,10 +1,5 @@
-// server/api/participants/get-participants.ts
-import db from '../../db/database';
-
-// Définir un type pour les lignes retournées par la base de données
-interface ParticipantRow {
-  pseudo: string;
-}
+import { db } from '../../utils/firebase';
+import { collection, query, where, getDocs } from 'firebase/firestore';
 
 export default defineEventHandler(async (event) => {
   const { code } = getQuery(event);
@@ -13,17 +8,15 @@ export default defineEventHandler(async (event) => {
     return createError({ statusCode: 400, statusMessage: 'Code manquant' });
   }
 
-  return new Promise((resolve, reject) => {
-    db.all<ParticipantRow>(
-      'SELECT pseudo FROM participants WHERE session_code = ?',
-      [code],
-      (err, rows) => {
-        if (err) {
-          reject(createError({ statusCode: 500, statusMessage: 'Erreur lors de la récupération des participants' }));
-        } else {
-          resolve({ participants: rows.map(row => row.pseudo) });
-        }
-      }
-    );
-  });
+  try {
+    const participantsRef = collection(db, 'participants');
+    const q = query(participantsRef, where('session_code', '==', code));
+    const querySnapshot = await getDocs(q);
+
+    const participants = querySnapshot.docs.map((doc) => doc.data().pseudo);
+    return { participants };
+  } catch (error) {
+    console.error('Erreur lors de la récupération des participants:', error);
+    return createError({ statusCode: 500, statusMessage: 'Erreur interne du serveur.' });
+  }
 });

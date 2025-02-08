@@ -1,5 +1,5 @@
-// server/api/session/close-session.ts
-import db from '../../db/database';
+import { db } from '../../utils/firebase';
+import { collection, query, where, getDocs, updateDoc, deleteDoc, doc } from 'firebase/firestore';
 
 export default defineEventHandler(async (event) => {
   const { code } = await readBody(event);
@@ -8,28 +8,31 @@ export default defineEventHandler(async (event) => {
     return createError({ statusCode: 400, statusMessage: 'Code de session manquant.' });
   }
 
-  return new Promise((resolve, reject) => {
-    db.run('UPDATE sessions SET status = ? WHERE code = ?', ['closed', code], (err) => {
-      if (err) {
-        console.error('Erreur lors de la fermeture de la session:', err);
-        reject(createError({ statusCode: 500, statusMessage: 'Erreur lors de la fermeture de la session.' }));
-      } else {
-        db.run('DELETE FROM participants WHERE session_code = ?', [code], (err) => {
-          if (err) {
-            console.error('Erreur lors de la suppression des participants:', err);
-            reject(createError({ statusCode: 500, statusMessage: 'Erreur lors de la suppression des participants.' }));
-          } else {
-            db.run('DELETE FROM sessions WHERE code = ?', [code], (err) => {
-              if (err) {
-                console.error('Erreur lors de la suppression de la session:', err);
-                reject(createError({ statusCode: 500, statusMessage: 'Erreur lors de la suppression de la session.' }));
-              } else {
-                resolve({ success: true });
-              }
-            });
-          }
-        });
-      }
+  try {
+    const sessionsRef = collection(db, 'sessions');
+    const q = query(sessionsRef, where('code', '==', code));
+    const querySnapshot = await getDocs(q);
+
+    if (querySnapshot.empty) {
+      return createError({ statusCode: 404, statusMessage: 'Session non trouvée.' });
+    }
+
+    const sessionDoc = querySnapshot.docs[0];
+    await updateDoc(doc(db, 'sessions', sessionDoc.id), { status: 'closed' });
+
+    const participantsRef = collection(db, 'participants');
+    const participantsQuery = query(participantsRef, where('session_code', '==', code));
+    const participantsSnapshot = await getDocs(participantsQuery);
+
+    participantsSnapshot.forEach(async (participantDoc) => {
+      await deleteDoc(doc(db, 'participants', participantDoc.id));
     });
-  });
+
+    await deleteDoc(doc(db, 'sessions', sessionDoc.id));
+
+    return { success: true };
+  } catch (error) {
+    console.error('Erreur lors de la fermeture de la session:', error);
+    return createError({ statusCode: 500, statusMessage: 'Erreur interne du serveur.' });
+  }
 });
