@@ -29,13 +29,6 @@ const router = useRouter();
 const sessionCode = ref('');
 const { public: { apiBaseUrl } } = useRuntimeConfig();
 
-// Définir un type pour la réponse de l'API
-interface ApiResponse {
-  success: boolean;
-  error?: string;
-  participants?: string[];
-}
-
 // Fonction pour générer un code aléatoire
 const generateCode = () => {
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';

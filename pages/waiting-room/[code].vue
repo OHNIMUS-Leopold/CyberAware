@@ -43,13 +43,6 @@ const participants = ref<string[]>([]);
 const isSessionClosed = ref(false);
 const { public: { apiBaseUrl } } = useRuntimeConfig();
 
-// Définir un type pour la réponse de l'API
-interface ApiResponse {
-  success: boolean;
-  error?: string;
-  participants?: string[];
-}
-
 // Charger les participants en temps réel
 const fetchParticipants = async () => {
   try {
