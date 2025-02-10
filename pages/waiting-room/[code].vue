@@ -9,6 +9,21 @@
           <li v-for="(participant, index) in participants" :key="index">{{ participant }}</li>
         </ul>
         <button class="bg-red-500 text-white px-4 py-2 rounded" @click="closeSession">Clore la session</button>
+        <h2>Liste des quizz</h2>
+        <ul class="list-disc ml-5">
+          <li v-for="(quiz, index) in quizzes" :key="index">
+            <h3>{{ quiz.title }}</h3>
+            <p>{{ quiz.description }}</p>
+            <ul class="list-disc ml-5">
+              <li v-for="(question, qIndex) in quiz.questions" :key="qIndex">
+                <p>{{ question.text }}</p>
+                <ul class="list-disc ml-5">
+                  <li v-for="(option, oIndex) in question.options" :key="oIndex">{{ option }}</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
       </div>
       <div v-else>
         <h2>Vous êtes un participant</h2>
@@ -46,6 +61,7 @@ const pseudo = ref('');
 const pseudoChosen = ref(false);
 const participants = ref<string[]>([]);
 const isSessionClosed = ref(false);
+const quizzes = ref<any[]>([]);
 const { public: { apiBaseUrl } } = useRuntimeConfig();
 
 // Vérifier si localStorage est disponible et récupérer les valeurs
@@ -66,9 +82,21 @@ const fetchParticipants = async () => {
   }
 };
 
-// Actualisation des participants
+// Charger les quizz et leurs questions
+const fetchQuizzes = async () => {
+  try {
+    const response = await fetch(`${apiBaseUrl}/api/quizzes/get-quizzes-with-questions`);
+    const data = await response.json();
+    quizzes.value = data.quizzes || [];
+  } catch (error) {
+    console.error('Erreur lors du chargement des quizz:', error);
+  }
+};
+
+// Actualisation des participants et des quizz
 onMounted(() => {
   fetchParticipants();
+  fetchQuizzes();
   const interval = setInterval(fetchParticipants, 5000);
   isClientReady.value = true;
   return () => clearInterval(interval);
