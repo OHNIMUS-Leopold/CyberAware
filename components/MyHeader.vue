@@ -34,14 +34,14 @@ onAuthStateChanged(auth, async (user) => {
                 </div>
             </div>
 
-            <nav class="hidden md:flex space-x-6">
+            <nav class="hidden md:flex space-x-6 items-center">
                 <NuxtLink to="/" class="hover:text-primary">Accueil</NuxtLink>
                 <NuxtLink to="/" class="hover:text-primary">S'informer</NuxtLink>
                 <NuxtLink to="/" class="hover:text-primary">Se former</NuxtLink>
                 <NuxtLink to="/" class="hover:text-primary">Signaler</NuxtLink>
                 <div class="contents">
-                    <NuxtLink v-if="userName" to="/auth" class="hover:text-primary">Se déconnecter</NuxtLink>
-                    <NuxtLink v-else to="/auth" class="hover:text-primary">S'authentifier</NuxtLink>
+                    <NuxtLink v-if="userName" to="/auth" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Se déconnecter</NuxtLink>
+                    <NuxtLink v-else to="/auth" class="bg-primary text-white px-4 py-2 rounded hover:bg-blue-800">S'authentifier</NuxtLink>
                 </div>
             </nav>
 
@@ -70,7 +70,10 @@ v-else xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
             <hr class="text-gray-200">
             <NuxtLink to="/" class="block py-2 px-4 hover:text-primary ">Signaler</NuxtLink>
             <hr class="text-gray-200">
-            <NuxtLink to="/auth" class="block py-2 px-4 hover:text-primary ">S'authentifier</NuxtLink>  
+            <div class="contents">
+                <NuxtLink v-if="userName" to="/auth" class="w-fit bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Se déconnecter</NuxtLink>
+                <NuxtLink v-else to="/auth" class="w-fit bg-primary text-white px-4 py-2 rounded hover:bg-blue-800">S'authentifier</NuxtLink>
+            </div>
         </nav>
     </header>
 </template>
