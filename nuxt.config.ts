@@ -8,11 +8,11 @@ export default defineNuxtConfig({
     '@nuxt/eslint'
   ],
 
-  runtimeConfig: {
-    public: {
-      apiBaseUrl: process.env.NUXT_PUBLIC_API_BASE_URL,
-    },
-  },
+  // runtimeConfig: {
+  //   public: {
+  //     apiBaseUrl: process.env.NUXT_PUBLIC_API_BASE_URL,
+  //   },
+  // },
 
   css: ['~/assets/css/main.css'],
   vite: {
