@@ -31,3 +31,18 @@ h3 {
     @apply text-xl font-bold;
 }
 
+/* à 768px et moins : */
+@media (max-width: 768px) {
+    body {
+        @apply p-4 text-sm;
+    }
+    h1 {
+        @apply text-3xl;
+    }
+    h2 {
+        @apply text-xl;
+    }
+    h3 {
+        @apply text-lg;
+    }
+}
