@@ -11,6 +11,10 @@
     @apply duration-500;
 }
 
+* {
+    font-family: var(--font-poppins);
+}
+
 body {
     @apply text-black text-base p-2;
 }
