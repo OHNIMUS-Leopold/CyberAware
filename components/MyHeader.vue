@@ -30,15 +30,16 @@ onAuthStateChanged(auth, async (user) => {
                     <span class="hover:text-primary text-2xl font-bold tracking-wide">CyberAware</span>
                 </NuxtLink>
                 <div v-if="userName">
-                    <p>(connecté sur le compte {{ userName }})</p>
+                    <p class="hidden md:block">(connecté sur le compte {{ userName }})</p>
+                    <p class="md:hidden">({{ userName }})</p>
                 </div>
             </div>
 
-            <nav class="hidden md:flex space-x-6 items-center">
+            <nav class="hidden md:flex space-x-4 items-center">
                 <NuxtLink to="/" class="hover:text-primary">Accueil</NuxtLink>
                 <NuxtLink to="/" class="hover:text-primary">S'informer</NuxtLink>
                 <NuxtLink to="/" class="hover:text-primary">Se former</NuxtLink>
-                <NuxtLink to="/" class="hover:text-primary">Signaler</NuxtLink>
+                <NuxtLink to="/" class="hover:text-primary pr-4">Signaler</NuxtLink>
                 <div class="contents">
                     <NuxtLink v-if="userName" to="/auth" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Se déconnecter</NuxtLink>
                     <NuxtLink v-else to="/auth" class="bg-primary text-white px-4 py-2 rounded hover:bg-blue-800">S'authentifier</NuxtLink>
@@ -70,9 +71,9 @@ v-else xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
             <hr class="text-gray-200">
             <NuxtLink to="/" class="block py-2 px-4 hover:text-primary ">Signaler</NuxtLink>
             <hr class="text-gray-200">
-            <div class="contents">
+            <div class="py-2">
                 <NuxtLink v-if="userName" to="/auth" class="w-fit bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Se déconnecter</NuxtLink>
-                <NuxtLink v-else to="/auth" class="w-fit bg-primary text-white px-4 py-2 rounded hover:bg-blue-800">S'authentifier</NuxtLink>
+                <NuxtLink v-else to="/auth" class="w-fit bg-primary text-white ml-4 px-4 py-2 rounded hover:bg-blue-800">S'authentifier</NuxtLink>
             </div>
         </nav>
     </header>
