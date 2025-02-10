@@ -6,10 +6,10 @@
     --color-primary: #2563EB; /* blue-600 */
     /* --color-secondary: #2F3699; */
 }
-/* 
+
 *:hover {
     @apply duration-500;
-} */
+}
 
 * {
     font-family: var(--font-poppins);
