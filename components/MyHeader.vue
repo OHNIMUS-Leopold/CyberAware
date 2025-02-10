@@ -39,7 +39,10 @@ onAuthStateChanged(auth, async (user) => {
                 <NuxtLink to="/" class="hover:text-primary">S'informer</NuxtLink>
                 <NuxtLink to="/" class="hover:text-primary">Se former</NuxtLink>
                 <NuxtLink to="/" class="hover:text-primary">Signaler</NuxtLink>
-                <NuxtLink to="/auth" class="hover:text-primary">S'authentifier</NuxtLink>
+                <div class="contents">
+                    <NuxtLink v-if="userName" to="/auth" class="hover:text-primary">Se déconnecter</NuxtLink>
+                    <NuxtLink v-else to="/auth" class="hover:text-primary">S'authentifier</NuxtLink>
+                </div>
             </nav>
 
             <button class="md:hidden focus:outline-none transition-transform" @click="toggleMenu">
