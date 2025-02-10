@@ -2,6 +2,11 @@
 import { signInWithEmailAndPassword, signOut, onAuthStateChanged, createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 
+const { $firebase } = useNuxtApp();
+const auth = $firebase.auth;
+const db = $firebase.db;
+
+
 const user = ref({ email: '', password: '', pseudo: '', isMod: false });
 const message = ref<string | null>(null);
 const valeur = ref<number | null>(null);
@@ -108,7 +113,7 @@ function onInscr() {
       <form class="space-y-4" @submit.prevent="onInscr">
         <input v-model="user.email" type="email" placeholder="Email" required class="w-full p-2 border border-gray-300 rounded" >
         <input id="password" v-model="user.password" type="password" placeholder="Mot de passe" required class="w-full p-2 border border-gray-300 rounded" >
-        <button type="button" class="text-green-500 hover:underline" @click="togglePasswordVisibility">Afficher/Masquer</button>
+        <button type="button" class="text-green-500 hover:underline" @click="togglePasswordVisibility">Afficher/Masquer le mot de passe</button>
         <input v-model="user.pseudo" type="text" placeholder="Pseudo" required class="w-full p-2 border border-gray-300 rounded" >
         <label class="flex items-center">
           <input v-model="user.isMod" type="checkbox" class="mr-2 bg-green-500" >

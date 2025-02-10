@@ -2,6 +2,10 @@
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 
+const { $firebase } = useNuxtApp();
+const auth = $firebase.auth;
+const db = $firebase.db;
+
 const userName = ref<string | null>(null);
 const menuToggle = ref(false);
 
