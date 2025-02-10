@@ -12,7 +12,6 @@ onMounted(() => {
   onAuthStateChanged(auth, (currentUser) => {
     if (currentUser) {
       message.value = "Utilisateur déjà connecté";
-      console.log(currentUser);
       valeur.value = 1;
     } else {
       message.value = "Utilisateur non connecté";
