@@ -6,17 +6,17 @@
     --color-primary: #2563EB; /* blue-600 */
     /* --color-secondary: #2F3699; */
 }
-
+/* 
 *:hover {
     @apply duration-500;
-}
+} */
 
 * {
     font-family: var(--font-poppins);
 }
 
 body {
-    @apply text-black text-base p-2;
+    @apply text-black text-base p-8;
 }
 
 h1 {
