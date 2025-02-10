@@ -3,10 +3,10 @@
         <div class="container mx-auto px-6 md:px-12">
 
             <nav class="flex flex-wrap justify-center gap-6 text-white text-base">
-                <RouterLink to="/" class="hover:text-blue-600">Accueil</RouterLink>
-                <RouterLink to="/" class="hover:text-blue-600">S'informer</RouterLink>
-                <RouterLink to="/" class="hover:text-blue-600">Outils</RouterLink>
-                <RouterLink to="/" class="hover:text-blue-600">Signaler</RouterLink>
+                <RouterLink to="/" class="hover:text-primary">Accueil</RouterLink>
+                <RouterLink to="/" class="hover:text-primary">S'informer</RouterLink>
+                <RouterLink to="/" class="hover:text-primary">Outils</RouterLink>
+                <RouterLink to="/" class="hover:text-primary">Signaler</RouterLink>
             </nav>
 
             <div class="border-t border-gray-700 my-5"></div>
