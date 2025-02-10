@@ -3,12 +3,20 @@
 
 @theme {
     --font-poppins: Poppins, sans-serif;
-    --color-primary: #3F48CC;
-    --color-secondary: #2F3699;
+    --color-primary: #2563EB; /* blue-600 */
+    /* --color-secondary: #2F3699; */
+}
+
+*:hover {
+    @apply duration-500;
+}
+
+* {
+    font-family: var(--font-poppins);
 }
 
 body {
-    @apply text-black text-base p-2;
+    @apply text-black text-base p-8;
 }
 
 h1 {
@@ -23,3 +31,22 @@ h3 {
     @apply text-xl font-bold;
 }
 
+/* à 768px et moins : */
+@media (max-width: 768px) {
+    body {
+        @apply p-4 text-sm;
+    }
+    h1 {
+        @apply text-3xl;
+    }
+    h2 {
+        @apply text-xl;
+    }
+    h3 {
+        @apply text-lg;
+    }
+}
+
+button {
+    cursor: pointer;
+}
