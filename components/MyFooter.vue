@@ -1,0 +1,23 @@
+<template>
+    <footer class="bg-black text-white py-6 w-full absolute transform -translate-x-1/2 left-1/2">
+        <div class="container mx-auto px-6 md:px-12">
+
+            <nav class="flex flex-wrap justify-center gap-6 text-white text-base">
+                <RouterLink to="/" class="hover:text-blue-600">Accueil</RouterLink>
+                <RouterLink to="/" class="hover:text-blue-600">S'informer</RouterLink>
+                <RouterLink to="/" class="hover:text-blue-600">Outils</RouterLink>
+                <RouterLink to="/" class="hover:text-blue-600">Signaler</RouterLink>
+            </nav>
+
+            <div class="border-t border-gray-700 my-5"></div>
+
+            <div class="flex flex-col md:flex-row items-center justify-between text-gray-400 text-sm">
+                <p>&copy; 2025 CyberProtect. Tous droits réservés.</p>
+                <div class="flex gap-6 mt-2 md:mt-0">
+                    <p>Mentions légales</p>
+                    <p>Politique de confidentialité</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</template>
