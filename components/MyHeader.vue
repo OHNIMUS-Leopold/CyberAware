@@ -37,8 +37,9 @@ onAuthStateChanged(auth, async (user) => {
             <nav class="hidden md:flex space-x-6">
                 <NuxtLink to="/" class="hover:text-primary">Accueil</NuxtLink>
                 <NuxtLink to="/" class="hover:text-primary">S'informer</NuxtLink>
-                <NuxtLink to="/" class="hover:text-primary">Outils</NuxtLink>
+                <NuxtLink to="/" class="hover:text-primary">Se former</NuxtLink>
                 <NuxtLink to="/" class="hover:text-primary">Signaler</NuxtLink>
+                <NuxtLink to="/auth" class="hover:text-primary">S'authentifier</NuxtLink>
             </nav>
 
             <button class="md:hidden focus:outline-none transition-transform" @click="toggleMenu">
@@ -62,9 +63,11 @@ v-else xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
             <hr class="text-gray-200">
             <NuxtLink to="/" class="block py-2 px-4 hover:text-primary ">S'informer</NuxtLink>
             <hr class="text-gray-200">
-            <NuxtLink to="/" class="block py-2 px-4 hover:text-primary ">Outils</NuxtLink>
+            <NuxtLink to="/" class="block py-2 px-4 hover:text-primary ">Se former</NuxtLink>
             <hr class="text-gray-200">
             <NuxtLink to="/" class="block py-2 px-4 hover:text-primary ">Signaler</NuxtLink>
+            <hr class="text-gray-200">
+            <NuxtLink to="/auth" class="block py-2 px-4 hover:text-primary ">S'authentifier</NuxtLink>  
         </nav>
     </header>
 </template>
