@@ -26,8 +26,8 @@ onAuthStateChanged(auth, async (user) => {
         <div class="mx-auto flex items-center justify-between p-4 md:px-8 ">
             
             <div class="flex items-center space-x-2">
-                <NuxtLink to="/" class="flex items-center">
-                    <span class="hover:text-primary text-2xl font-bold tracking-wide">CyberAware</span>
+                <NuxtLink to="/" class="hover:text-primary text-2xl font-bold tracking-wide">
+                    CyberAware
                 </NuxtLink>
                 <div v-if="userName">
                     <p class="hidden md:block">(connecté sur le compte {{ userName }})</p>
