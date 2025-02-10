@@ -9,7 +9,7 @@
                 <RouterLink to="/" class="hover:text-primary">Signaler</RouterLink>
             </nav>
 
-            <div class="border-t border-gray-700 my-5"></div>
+            <div class="border-t border-gray-700 my-5"/>
 
             <div class="flex flex-col md:flex-row items-center justify-between text-gray-400 text-sm">
                 <p>&copy; 2025 CyberProtect. Tous droits réservés.</p>

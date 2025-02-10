@@ -1,5 +1,5 @@
 <template>
   <div>
-    <a href=""></a>
+    <a href=""/>
   </div>
 </template>
