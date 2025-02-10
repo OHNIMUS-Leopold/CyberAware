@@ -23,7 +23,7 @@ onAuthStateChanged(auth, async (user) => {
 
 <template>
     <header class="bg-white text-black border-b-2 border-primary shadow-md fixed top-0 left-0 w-full z-10">
-        <div class="mx-auto flex items-center justify-between p-4 px-8 ">
+        <div class="mx-auto flex items-center justify-between p-4 md:px-8 ">
             
             <div class="flex items-center space-x-2">
                 <NuxtLink to="/" class="flex items-center">
