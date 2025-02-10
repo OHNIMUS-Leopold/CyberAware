@@ -2,6 +2,11 @@
 import { signInWithEmailAndPassword, signOut, onAuthStateChanged, createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 
+const { $firebase } = useNuxtApp();
+const auth = $firebase.auth;
+const db = $firebase.db;
+
+
 const user = ref({ email: '', password: '', pseudo: '', isMod: false });
 const message = ref<string | null>(null);
 const valeur = ref<number | null>(null);
