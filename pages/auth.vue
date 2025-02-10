@@ -85,7 +85,7 @@ function onInscr() {
 
 <template>
   <div class="mt-28 mb-20 max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
-    <h1 class="mb-4 text-center">Authentification</h1>
+    <h1 class="mb-4 text-center text-6xl">Authentification</h1>
     <p class="mb-4 text-red-500 text-center">{{ message }}</p>
     <div v-if="valeur !== 1" class="mb-4 text-center">
       <label class="mr-4">
@@ -96,28 +96,28 @@ function onInscr() {
       </label>
     </div>
     <div v-if="valeur !== 1 && authMode === 'login'" class="mb-4">
-      <h2 class="text-xl font-semibold mb-2">Connexion</h2>
+      <h2 class="mb-2">Connexion</h2>
       <form @submit.prevent="onCnx" class="space-y-4">
         <input v-model="user.email" type="email" placeholder="Email" required class="w-full p-2 border border-gray-300 rounded" />
         <input id="password" v-model="user.password" type="password" placeholder="Mot de passe" required class="w-full p-2 border border-gray-300 rounded" />
-        <button type="button" @click="togglePasswordVisibility" class="text-primary hover:underline">Afficher/Masquer</button>
+        <button type="button" @click="togglePasswordVisibility" class="text-primary hover:underline">Afficher/Masquer le mot de passe</button>
         <button type="submit" class="w-full bg-primary text-white p-2 rounded hover:bg-blue-800">Se connecter</button>
       </form>
-    </div>
-    <div v-if="valeur !== 1 && authMode === 'register'" class="mb-4">
-      <h2 class="text-xl font-semibold mb-2">Inscription</h2>
+        </div>
+        <div v-if="valeur !== 1 && authMode === 'register'" class="mb-4">
+      <h2 class="mb-2">Inscription</h2>
       <form @submit.prevent="onInscr" class="space-y-4">
         <input v-model="user.email" type="email" placeholder="Email" required class="w-full p-2 border border-gray-300 rounded" />
-        <input v-model="user.password" type="password" placeholder="Mot de passe" required class="w-full p-2 border border-gray-300 rounded" />
+        <input id="password" v-model="user.password" type="password" placeholder="Mot de passe" required class="w-full p-2 border border-gray-300 rounded" />
+        <button type="button" @click="togglePasswordVisibility" class="text-green-500 hover:underline">Afficher/Masquer</button>
         <input v-model="user.pseudo" type="text" placeholder="Pseudo" required class="w-full p-2 border border-gray-300 rounded" />
         <label class="flex items-center">
-          <input type="checkbox" v-model="user.isMod" class="mr-2" />
-          Modérateur
+          <input type="checkbox" v-model="user.isMod" class="mr-2 bg-green-500" />
+          Modérer les sessions
         </label>
         <button type="submit" class="w-full bg-green-500 text-white p-2 rounded hover:bg-green-600">S'inscrire</button>
       </form>
     </div>
     <button v-if="valeur === 1" @click="onDcnx" class="w-full bg-red-500 text-white p-2 rounded hover:bg-red-600">Se déconnecter</button>
   </div>
-  
 </template>
