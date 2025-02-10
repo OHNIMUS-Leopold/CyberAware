@@ -84,7 +84,7 @@ function onInscr() {
 
 <template>
   <div class="mt-28 mb-20 max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
-    <h1 class="mb-4 text-center text-6xl">Authentification</h1>
+    <h1 class="mb-4 text-center">Authentification</h1>
     <p class="mb-4 text-red-500 text-center">{{ message }}</p>
     <div v-if="valeur !== 1" class="mb-4 text-center">
       <label class="mr-4">
