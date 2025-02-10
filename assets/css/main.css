@@ -4,7 +4,7 @@
 @tailwind components;
 @tailwind utilities;
 
-*:hover {
+a:hover, button:hover {
     @apply duration-500;
 }
 
