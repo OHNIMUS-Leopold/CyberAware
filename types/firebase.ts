@@ -1,15 +1,26 @@
-// Types pour les collections Firestore
+import type { User } from 'firebase/auth';
+
+// Authentification
+export interface AuthUser extends User {}
+export interface FirestoreUser {
+  pseudo: string;
+  isMod: boolean;
+}
+
+// Collections Firestore
 export interface UserData {
   pseudo: string;
   isMod: boolean;
+  createdAt: Date;
 }
 
 export interface QuizSession {
   moderatorId: string;
   participants: string[];
-  status: 'waiting' | 'in_progress' | 'ended';
+  status: 'waiting' | 'in_progress' | 'ended' | 'deleted';
   quizId: string | null;
   createdAt: Date;
+  endedAt?: Date;
 }
 
 export interface Quiz {
