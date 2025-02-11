@@ -1,7 +1,8 @@
 import type { User } from 'firebase/auth';
 
 // Authentification
-export interface AuthUser extends User {}
+export type AuthUser = User;
+
 export interface FirestoreUser {
   pseudo: string;
   isMod: boolean;

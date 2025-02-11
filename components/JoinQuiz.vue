@@ -83,7 +83,7 @@ const joinSession = async () => {
       return;
     }
 
-    const session = sessionDoc.data() as QuizSession;
+    // const session = sessionDoc.data() as QuizSession;
     await updateDoc(sessionRef, {
       participants: arrayUnion(authUser.uid)
     });
@@ -114,12 +114,12 @@ const generateSessionId = () => {
               v-model="sessionCode"
               placeholder="Entrez le code de session"
               class="flex-1 p-2 border rounded"
-            />
+            >
             <RoundedButton
-              @click="joinSession"
               :label="'Rejoindre'"
-              :bgColor="'bg-green-500'"
+              :bg-color="'bg-green-500'"
               class="hover:bg-green-600"
+              @click="joinSession"
             />
           </div>
         </div>
@@ -127,10 +127,10 @@ const generateSessionId = () => {
         <!-- Création de session (visible uniquement pour les modérateurs) -->
         <div v-if="isModerator" class="text-center mt-6">
           <RoundedButton
-            @click="createSession"
             :label="'Créer une nouvelle session'"
-            :bgColor="'bg-primary'"
+            :bg-color="'bg-primary'"
             class="hover:bg-blue-800"
+            @click="createSession"
           />
         </div>
       </div>
