@@ -13,7 +13,11 @@ a:hover, button:hover {
 }
 
 body {
-    @apply text-black text-base p-8;
+    @apply text-black text-base;
+}
+
+main {
+    @apply px-8 my-28;
 }
 
 h1 {
@@ -31,7 +35,10 @@ h3 {
 /* à 768px et moins : */
 @media (max-width: 768px) {
     body {
-        @apply p-4 text-sm;
+        @apply text-sm;
+    }
+    main {
+        @apply px-4;
     }
     h1 {
         @apply text-3xl;

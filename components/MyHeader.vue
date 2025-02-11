@@ -41,9 +41,8 @@ onAuthStateChanged(auth, async (user) => {
 
             <nav class="hidden md:flex space-x-4 items-center">
                 <NuxtLink to="/" class="hover:text-primary">Accueil</NuxtLink>
-                <NuxtLink to="/" class="hover:text-primary">S'informer</NuxtLink>
-                <NuxtLink to="/" class="hover:text-primary">Se former</NuxtLink>
-                <NuxtLink to="/" class="hover:text-primary pr-4">Signaler</NuxtLink>
+                <NuxtLink to="/info" class="hover:text-primary">S'informer</NuxtLink>
+                <NuxtLink to="/warn" class="hover:text-primary pr-4">Signaler</NuxtLink>
                 <div class="contents">
                     <NuxtLink v-if="userName" to="/auth" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Se déconnecter</NuxtLink>
                     <NuxtLink v-else to="/auth" class="bg-primary text-white px-4 py-2 rounded hover:bg-blue-800">S'authentifier</NuxtLink>
@@ -69,11 +68,9 @@ v-else xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
             class="md:hidden flex-col bg-white border-b-2 border-t-2 border-t-gray-200 border-primary text-black p-6 space-y-4 absolute inset-x-0 top-[4.5rem] shadow-lg rounded-b-lg transition-all">
             <NuxtLink to="/" class="block py-2 px-4 hover:text-primary" @click="toggleMenu">Accueil</NuxtLink>
             <hr class="text-gray-200">
-            <NuxtLink to="/" class="block py-2 px-4 hover:text-primary" @click="toggleMenu">S'informer</NuxtLink>
+            <NuxtLink to="/info" class="block py-2 px-4 hover:text-primary" @click="toggleMenu">S'informer</NuxtLink>
             <hr class="text-gray-200">
-            <NuxtLink to="/" class="block py-2 px-4 hover:text-primary" @click="toggleMenu">Se former</NuxtLink>
-            <hr class="text-gray-200">
-            <NuxtLink to="/" class="block py-2 px-4 hover:text-primary" @click="toggleMenu">Signaler</NuxtLink>
+            <NuxtLink to="/warn" class="block py-2 px-4 hover:text-primary" @click="toggleMenu">Signaler</NuxtLink>
             <hr class="text-gray-200">
             <div class="py-2">
             <NuxtLink v-if="userName" to="/auth" class="w-fit bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600" @click="toggleMenu">Se déconnecter</NuxtLink>
