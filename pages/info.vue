@@ -32,8 +32,8 @@ const isSectionOpen = (index: number, category: 'threats' | 'practices') => {
             class="mb-4 border rounded-lg"
             >
                 <button
-                    @click="toggleSection(index, 'threats')"
                     class="w-full p-2 bg-gray-200 text-left flex justify-between items-center"
+                    @click="toggleSection(index, 'threats')"
                 >
                     {{ threat.title }}
                     <span class="ml-2">{{ isSectionOpen(index, 'threats') ? '-' : '+' }}</span>
@@ -55,8 +55,8 @@ const isSectionOpen = (index: number, category: 'threats' | 'practices') => {
                 class="mb-4 border rounded-lg"
                 >
                 <button
-                    @click="toggleSection(index, 'practices')"
                     class="w-full p-2 bg-green-200 text-left flex justify-between items-center"
+                    @click="toggleSection(index, 'practices')"
                 >
                     {{ practice.title }}
                     <span class="ml-2">{{ isSectionOpen(index, 'practices') ? '-' : '+' }}</span>
