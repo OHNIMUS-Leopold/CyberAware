@@ -52,6 +52,12 @@ const submitForm = () => {
 <template>
     <main class="mb-20 max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
         <h1 class="mb-4 text-center">Contactez-nous</h1>
+        <p class="mb-4">
+            Vous êtes victime ou témoin d'une atteinte à la cyber-sécurité ? Signalez-le
+            <a class="text-primary hover:text-blue-800" href="https://www.internet-signalement.gouv.fr/PharosS1/" target="_blank">ici</a> !
+            <br><br>
+            Vous pouvez également nous en informer si vous le souhaitez, en remplissant le formulaire ci-dessous.
+        </p>
         <form class="space-y-4" @submit.prevent="submitForm">
             <input v-model="name" type="text" placeholder="Nom" required class="w-full p-2 border border-gray-300 rounded">
             <input v-model="email" type="email" placeholder="Email" required class="w-full p-2 border border-gray-300 rounded">
