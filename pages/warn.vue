@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { getDatabase, ref as dbRef, push, set } from 'firebase/database';
-import { ref } from 'vue';
 
 const database = getDatabase();
 
