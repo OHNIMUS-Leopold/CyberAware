@@ -7,7 +7,6 @@
 </template>
 
 <script setup lang="ts">
-
 const props = defineProps({
     label: {
         type: String,
@@ -18,5 +17,4 @@ const props = defineProps({
         default: 'bg-primary', 
     },
 });
-
 </script>
