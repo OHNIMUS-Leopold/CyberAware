@@ -27,8 +27,8 @@ onAuthStateChanged(auth, async (user) => {
 
             <nav class="flex flex-wrap justify-center gap-6 text-white">
                 <RouterLink to="/" class="hover:text-primary">Accueil</RouterLink>
-                <RouterLink to="/" class="hover:text-primary">S'informer</RouterLink>
-                <RouterLink to="/" class="hover:text-primary">Signaler</RouterLink>
+                <RouterLink to="/info" class="hover:text-primary">S'informer</RouterLink>
+                <RouterLink to="/warn" class="hover:text-primary">Signaler</RouterLink>
                 <div class="contents">
                     <NuxtLink v-if="userName" to="/auth" class="hover:text-primary">Se déconnecter</NuxtLink>
                     <NuxtLink v-else to="/auth" class="hover:text-primary">S'authentifier</NuxtLink>
