@@ -104,7 +104,7 @@ const getOptionClass = (option: string) => {
 <template>
     <main>
         <h1 class="text-center">Se former à la cybersécurité</h1>
-        <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-10 gap-4">
+        <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-10 gap-4 mb-20" >
             <div class="md:col-span-1 lg:col-span-2">
                 <h2 class="mb-4">Qu'est-ce que la cybersécurité ?</h2>
                 <p>
@@ -130,15 +130,18 @@ const getOptionClass = (option: string) => {
                 </div>
             </div>
         </section>
-        <section>
-
-    
-        
-            <div class="justify-center mx-4 bg-white rounded-lg p-8 mt-10">
+        <section class="mb-20">
+            <div class="justify-center bg-white rounded-lg mt-10">
                 <h2 class="text-center  mb-4">Testeur de mot de passe</h2>
                 <p class="text-center mb-4">La sécurité de vos mots de passe est essentielle pour protéger vos informations personnelles et professionnelles. Utilisez notre testeur de mot de passe pour vérifier la robustesse de vos mots de passe et obtenir des conseils pour les renforcer.</p>
-                
                 <PasswordTester />
+            </div>
+        </section>
+        <section class="mb-20">
+            <div class="justify-center bg-white rounded-lg mt-10">
+                <h2 class="text-center mb-4">Mémori sur la cybersécurité</h2>
+                <p class="text-center mb-4">Ce mémori sur la cybersécurité est un excellent moyen de renforcer vos connaissances en matière de sécurité en ligne. Associez les cartes pour découvrir des conseils et des informations importantes sur la protection de vos données et la prévention des cyberattaques.</p>
+                <MemoryCards />
             </div>
         </section>
     </main>
