@@ -112,6 +112,7 @@ const getOptionClass = (option: string) => {
                     <br><br>
                     Testez vos connaissances en cybersécurité en répondant à notre quiz interactif. Chaque question vous aidera à mieux comprendre les concepts clés et à renforcer vos compétences pour protéger vos informations en ligne.
                 </p>
+                <JoinQuiz />
             </div>
             <div class="text-center bg-gray-100 p-4 rounded-lg border border-gray-300 w-full md:w-11/12 lg:w-11/12 px-4 py-8 place-self-center">
                 <h2 class="mb-8">Quiz interactif</h2>
