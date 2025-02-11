@@ -104,8 +104,8 @@ const getOptionClass = (option: string) => {
 <template>
     <main>
         <h1 class="text-center">Se former à la cybersécurité</h1>
-        <section class="grid grid-cols-3 mt-10">
-            <div class="col-span-2">
+        <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-10 gap-4">
+            <div class="md:col-span-1 lg:col-span-2">
                 <h2 class="mb-4">Qu'est-ce que la cybersécurité ?</h2>
                 <p>
                     La cybersécurité est la pratique de protéger les systèmes, les réseaux et les programmes contre les attaques numériques. Ces attaques visent généralement à accéder, modifier ou détruire des informations sensibles, extorquer de l'argent aux utilisateurs ou interrompre les processus commerciaux normaux.
@@ -113,13 +113,13 @@ const getOptionClass = (option: string) => {
                     Testez vos connaissances en cybersécurité en répondant à notre quiz interactif. Chaque question vous aidera à mieux comprendre les concepts clés et à renforcer vos compétences pour protéger vos informations en ligne.
                 </p>
             </div>
-            <div class="text-center bg-gray-100 p-4 rounded-lg border border-gray-300 w-11/12 px-12 py-8 place-self-center">
+            <div class="text-center bg-gray-100 p-4 rounded-lg border border-gray-300 w-full md:w-11/12 lg:w-11/12 px-4 py-8 place-self-center">
                 <h2 class="mb-8">Quiz interactif</h2>
                 <div v-if="currentQuestion < questions.length">
                     <h3 class="mb-4">{{ questions[currentQuestion].question }}</h3>
                     <div v-for="(option, index) in questions[currentQuestion].options" :key="index" class="mb-1 space-x-2 flex items-center w-fit mx-auto p-2 rounded-lg" :class="getOptionClass(option)">
                         <input class="cursor-pointer" type="checkbox" :id="'option' + index" :value="option" v-model="selectedOptions" :disabled="showFeedback">
-                        <label class="cursor-pointer" :for="'option' + index" >{{ option }}</label>
+                        <label class="cursor-pointer" :for="'option' + index">{{ option }}</label>
                     </div>
                     <RoundedButton label="Soumettre" bgColor="bg-primary" class="hover:bg-blue-800 px-4" style="width: fit-content;" :disabled="showFeedback" @click="submitAnswer" />
                 </div>
