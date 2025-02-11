@@ -104,42 +104,46 @@ const getOptionClass = (option: string) => {
 <template>
     <main>
         <h1 class="text-center">Se former à la cybersécurité</h1>
-        <div class="grid grid-cols-2 gap-16 mt-10">
-            <section>
-                <h2 class="mb-2">Qu'est-ce que la cybersécurité ?</h2>
+        <section class="grid grid-cols-3 mt-10">
+            <div class="col-span-2">
+                <h2 class="mb-4">Qu'est-ce que la cybersécurité ?</h2>
                 <p>
                     La cybersécurité est la pratique de protéger les systèmes, les réseaux et les programmes contre les attaques numériques. Ces attaques visent généralement à accéder, modifier ou détruire des informations sensibles, extorquer de l'argent aux utilisateurs ou interrompre les processus commerciaux normaux.
                     <br><br>
                     Testez vos connaissances en cybersécurité en répondant à notre quiz interactif. Chaque question vous aidera à mieux comprendre les concepts clés et à renforcer vos compétences pour protéger vos informations en ligne.
                 </p>
-            </section>
-            <section>
-                <h2 class="mb-2">Quiz interactif</h2>
+            </div>
+            <div class="text-center bg-gray-100 p-4 rounded-lg border border-gray-300 w-11/12 px-12 py-8 place-self-center">
+                <h2 class="mb-8">Quiz interactif</h2>
                 <div v-if="currentQuestion < questions.length">
-                    <h3>{{ questions[currentQuestion].question }}</h3>
-                    <div v-for="(option, index) in questions[currentQuestion].options" :key="index">
-                        <input type="checkbox" :id="'option' + index" :value="option" v-model="selectedOptions" :disabled="showFeedback">
-                        <label :for="'option' + index" :class="getOptionClass(option)">{{ option }}</label>
+                    <h3 class="mb-4">{{ questions[currentQuestion].question }}</h3>
+                    <div v-for="(option, index) in questions[currentQuestion].options" :key="index" class="mb-1 space-x-2 flex items-center w-fit mx-auto p-2 rounded-lg" :class="getOptionClass(option)">
+                        <input class="cursor-pointer" type="checkbox" :id="'option' + index" :value="option" v-model="selectedOptions" :disabled="showFeedback">
+                        <label class="cursor-pointer" :for="'option' + index" >{{ option }}</label>
                     </div>
-                    <RoundedButton label="Soumettre" bgColor="bg-primary" class="hover:bg-blue-800 w-auto px-4" :disabled="showFeedback" @click="submitAnswer" />
+                    <RoundedButton label="Soumettre" bgColor="bg-primary" class="hover:bg-blue-800 px-4" style="width: fit-content;" :disabled="showFeedback" @click="submitAnswer" />
                 </div>
                 
                 <div v-else>
                     <h3>Votre score : {{ score }}/{{ questions.length }}</h3>
-                    <RoundedButton label="Recommencer le quiz" bgColor="bg-green-500" class="hover:bg-green-600 px-4 w-auto" @click="resetQuiz" />
+                    <RoundedButton label="Recommencer le quiz" bgColor="bg-green-500" class="hover:bg-green-600 px-4" style="width: fit-content;" @click="resetQuiz" />
                 </div>
-            </section>
-        </div>
+            </div>
+        </section>
+        <section>
+            
+        </section>
     </main>
 </template>
 
+
 <style scoped>
 .correct {
-    background-color: green;
+    background-color: #22c55e; 
     color: white;
 }
 .incorrect {
-    background-color: red;
+    background-color: #ef4444; 
     color: white;
 }
 </style>
