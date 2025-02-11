@@ -100,7 +100,7 @@ onMounted(() => {
 
         <div class="mt-8 text-center">
             <p>Votre mot de passe peut être craqué avec un ordinateur de bureau standard en environ...</p>
-            <p id="crack-time" class="mt-2 text-primary">-</p>
+            <p id="crack-time" class="mt-2 text-primary font-bold text-2xl">-</p>
             <p id="fact" class="mt-2">-</p>
         </div>
     </div>
