@@ -66,14 +66,14 @@ onMounted(() => {
         <label for="password" class="block mb-4">Testez votre mot de passe :</label>
         <div class="relative">
             <input
-                ref="passwordInput"
                 id="password"
+                ref="passwordInput"
                 type="password"
                 class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary"
                 placeholder="Entrez votre mot de passe..."
-            />
+            >
             <div class="absolute top-1/2 right-4 transform -translate-y-1/2">
-                <button @click="toggleVisibility" class="text-gray-500 focus:outline-none">
+                <button class="text-gray-500 focus:outline-none" @click="toggleVisibility">
                     <svg
                         id="eye-icon"
                         xmlns="http://www.w3.org/2000/svg"
@@ -85,8 +85,8 @@ onMounted(() => {
                         stroke-linecap="round"
                         stroke-linejoin="round"
                     >
-                        <path d="M1 12C3.2 7.6 7.6 4 12 4s8.8 3.6 11 8c-2.2 4.4-6.6 8-11 8s-8.8-3.6-11-8z"></path>
-                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M1 12C3.2 7.6 7.6 4 12 4s8.8 3.6 11 8c-2.2 4.4-6.6 8-11 8s-8.8-3.6-11-8z"/>
+                        <circle cx="12" cy="12" r="3"/>
                     </svg>
                 </button>
             </div>
@@ -94,14 +94,14 @@ onMounted(() => {
 
         <div class="w-full h-2 bg-gray-200 rounded-full mt-4">
             <div
-                ref="progressBar"
                 id="progress-bar"
+                ref="progressBar"
                 class="h-2 bg-primary rounded-full transition-all duration-500"
                 style="width: 0%;"
-            ></div>
+            />
         </div>
 
-        <div ref="feedback" id="feedback" class="mt-8 p-6 border border-primary rounded-lg bg-blue-50 hidden">
+        <div id="feedback" ref="feedback" class="mt-8 p-6 border border-primary rounded-lg bg-blue-50 hidden">
             <h2 class="flex items-center gap-2 text-primary">✅ Bon mot de passe!</h2>
             <ul class="list-disc pl-5 mt-2">
                 <li>Votre mot de passe est résistant au piratage.</li>
@@ -111,8 +111,8 @@ onMounted(() => {
 
         <div class="mt-8 text-center">
             <p>Votre mot de passe peut être craqué avec un ordinateur de bureau standard en environ...</p>
-            <p ref="crackTime" id="crack-time" class="mt-2 text-primary font-bold text-2xl">-</p>
-            <p ref="fact" id="fact" class="mt-2">-</p>
+            <p id="crack-time" ref="crackTime" class="mt-2 text-primary font-bold text-2xl">-</p>
+            <p id="fact" ref="fact" class="mt-2">-</p>
         </div>
     </div>
 </template>
