@@ -118,20 +118,28 @@ const getOptionClass = (option: string) => {
                 <div v-if="currentQuestion < questions.length">
                     <h3 class="mb-4">{{ questions[currentQuestion].question }}</h3>
                     <div v-for="(option, index) in questions[currentQuestion].options" :key="index" class="mb-1 space-x-2 flex items-center w-fit mx-auto p-2 rounded-lg" :class="getOptionClass(option)">
-                        <input class="cursor-pointer" type="checkbox" :id="'option' + index" :value="option" v-model="selectedOptions" :disabled="showFeedback">
+                        <input :id="'option' + index" v-model="selectedOptions" class="cursor-pointer" type="checkbox" :value="option" :disabled="showFeedback">
                         <label class="cursor-pointer" :for="'option' + index">{{ option }}</label>
                     </div>
-                    <RoundedButton label="Soumettre" bgColor="bg-primary" class="hover:bg-blue-800 px-4" style="width: fit-content;" :disabled="showFeedback" @click="submitAnswer" />
+                    <RoundedButton label="Soumettre" bg-color="bg-primary" class="hover:bg-blue-800 px-4" style="width: fit-content;" :disabled="showFeedback" @click="submitAnswer" />
                 </div>
                 
                 <div v-else>
                     <h3>Votre score : {{ score }}/{{ questions.length }}</h3>
-                    <RoundedButton label="Recommencer le quiz" bgColor="bg-green-500" class="hover:bg-green-600 px-4" style="width: fit-content;" @click="resetQuiz" />
+                    <RoundedButton label="Recommencer le quiz" bg-color="bg-green-500" class="hover:bg-green-600 px-4" style="width: fit-content;" @click="resetQuiz" />
                 </div>
             </div>
         </section>
         <section>
-            
+
+    
+        
+            <div class="justify-center mx-4 bg-white rounded-lg p-8 mt-10">
+                <h2 class="text-center  mb-4">Testeur de mot de passe</h2>
+                <p class="text-center mb-4">La sécurité de vos mots de passe est essentielle pour protéger vos informations personnelles et professionnelles. Utilisez notre testeur de mot de passe pour vérifier la robustesse de vos mots de passe et obtenir des conseils pour les renforcer.</p>
+                
+                <PasswordTester />
+            </div>
         </section>
     </main>
 </template>
