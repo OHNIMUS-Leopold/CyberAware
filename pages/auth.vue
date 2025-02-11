@@ -105,10 +105,10 @@ function onInscr() {
         <input v-model="user.email" type="email" placeholder="Email" required class="w-full p-2 border border-gray-300 rounded" >
         <input id="password" v-model="user.password" type="password" placeholder="Mot de passe" required class="w-full p-2 border border-gray-300 rounded" >
         <button type="button" class="text-primary hover:underline" @click="togglePasswordVisibility">Afficher/Masquer le mot de passe</button>
-        <button type="submit" class="w-full bg-primary text-white p-2 rounded hover:bg-blue-800">Se connecter</button>
+        <RoundedButton label="Se connecter" bgColor="bg-primary" class="hover:bg-blue-800" @click="onCnx" />
       </form>
-        </div>
-        <div v-if="valeur !== 1 && authMode === 'register'" class="mb-4">
+    </div>
+    <div v-if="valeur !== 1 && authMode === 'register'" class="mb-4">
       <h2 class="mb-2">Inscription</h2>
       <form class="space-y-4" @submit.prevent="onInscr">
         <input v-model="user.email" type="email" placeholder="Email" required class="w-full p-2 border border-gray-300 rounded" >
@@ -116,12 +116,11 @@ function onInscr() {
         <button type="button" class="text-green-500 hover:underline" @click="togglePasswordVisibility">Afficher/Masquer le mot de passe</button>
         <input v-model="user.pseudo" type="text" placeholder="Pseudo" required class="w-full p-2 border border-gray-300 rounded" >
         <label class="flex items-center">
-          <input v-model="user.isMod" type="checkbox" class="mr-2 bg-green-500" >
-          Modérer les sessions
+          <input v-model="user.isMod" type="checkbox" class="mr-2 bg-green-500" > Modérer les sessions
         </label>
-        <button type="submit" class="w-full bg-green-500 text-white p-2 rounded hover:bg-green-600">S'inscrire</button>
+        <RoundedButton label="S'inscrire" bgColor="bg-green-500" class="hover:bg-green-600" @click="onInscr" />
       </form>
     </div>
-    <button v-if="valeur === 1" class="w-full bg-red-500 text-white p-2 rounded hover:bg-red-600" @click="onDcnx">Se déconnecter</button>
+    <RoundedButton v-if="valeur === 1" label="Se déconnecter" bgColor="bg-red-500" class="hover:bg-red-600" @click="onDcnx" />
   </main>
 </template>
