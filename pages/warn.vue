@@ -61,9 +61,9 @@ const submitForm = () => {
         <form class="space-y-4" @submit.prevent="submitForm">
             <input v-model="name" type="text" placeholder="Nom" required class="w-full p-2 border border-gray-300 rounded">
             <input v-model="email" type="email" placeholder="Email" required class="w-full p-2 border border-gray-300 rounded">
-            <textarea v-model="message" placeholder="Message" required class="w-full p-2 border border-gray-300 rounded"></textarea>
+            <textarea v-model="message" placeholder="Message" required class="w-full p-2 border border-gray-300 rounded"/>
             <div class="flex items-center">
-                <input v-model="checkbox" type="checkbox" id="dataConsent" required class="mr-2">
+                <input id="dataConsent" v-model="checkbox" type="checkbox" required class="mr-2">
                 <label for="dataConsent">J'accepte le traitement des données</label>
             </div>
             <RoundedButton label="Envoyer" bg-color="bg-primary" class="hover:bg-blue-800" @click="submitForm" />
