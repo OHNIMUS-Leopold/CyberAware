@@ -42,7 +42,7 @@ onAuthStateChanged(auth, async (user) => {
             <nav class="hidden md:flex space-x-4 items-center">
                 <NuxtLink to="/" class="hover:text-primary">Accueil</NuxtLink>
                 <NuxtLink to="/" class="hover:text-primary">S'informer</NuxtLink>
-                <NuxtLink to="/" class="hover:text-primary">Se former</NuxtLink>
+                <NuxtLink to="/formation" class="hover:text-primary">Se former</NuxtLink>
                 <NuxtLink to="/" class="hover:text-primary pr-4">Signaler</NuxtLink>
                 <div class="contents">
                     <NuxtLink v-if="userName" to="/auth" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Se déconnecter</NuxtLink>
@@ -71,7 +71,7 @@ v-else xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
             <hr class="text-gray-200">
             <NuxtLink to="/" class="block py-2 px-4 hover:text-primary" @click="toggleMenu">S'informer</NuxtLink>
             <hr class="text-gray-200">
-            <NuxtLink to="/" class="block py-2 px-4 hover:text-primary" @click="toggleMenu">Se former</NuxtLink>
+            <NuxtLink to="/formation" class="block py-2 px-4 hover:text-primary" @click="toggleMenu">Se former</NuxtLink>
             <hr class="text-gray-200">
             <NuxtLink to="/" class="block py-2 px-4 hover:text-primary" @click="toggleMenu">Signaler</NuxtLink>
             <hr class="text-gray-200">
