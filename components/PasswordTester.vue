@@ -1,12 +1,16 @@
 <script setup lang="ts">
-const checkPassword = () => {
-    const password = (document.getElementById('password') as HTMLInputElement).value;
-    const progressBar = document.getElementById('progress-bar') as HTMLDivElement;
-    const feedback = document.getElementById('feedback') as HTMLDivElement;
-    const crackTime = document.getElementById('crack-time') as HTMLParagraphElement;
-    const fact = document.getElementById('fact') as HTMLParagraphElement;
+const passwordInput = ref<HTMLInputElement | null>(null);
+const progressBar = ref<HTMLDivElement | null>(null);
+const feedback = ref<HTMLDivElement | null>(null);
+const crackTime = ref<HTMLParagraphElement | null>(null);
+const fact = ref<HTMLParagraphElement | null>(null);
 
+const checkPassword = () => {
+    if (!passwordInput.value) return;
+
+    const password = passwordInput.value.value;
     let strength = 0;
+
     if (password.length >= 8) strength += 1;
     if (/[A-Z]/.test(password)) strength += 1;
     if (/[a-z]/.test(password)) strength += 1;
@@ -23,31 +27,37 @@ const checkPassword = () => {
 
     const level = levels[strength];
 
-    progressBar.style.width = level.percent;
-    progressBar.className = `h-2 rounded-full transition-all duration-500 ${level.color}`;
-
-    if (strength >= 3) {
-        feedback.classList.remove('hidden');
-    } else {
-        feedback.classList.add('hidden');
+    if (progressBar.value) {
+        progressBar.value.style.width = level.percent;
+        progressBar.value.className = `h-2 rounded-full transition-all duration-500 ${level.color}`;
     }
 
-    crackTime.textContent = level.time;
-    fact.textContent = level.fact;
+    if (feedback.value) {
+        if (strength >= 3) {
+            feedback.value.classList.remove('hidden');
+        } else {
+            feedback.value.classList.add('hidden');
+        }
+    }
+
+    if (crackTime.value) crackTime.value.textContent = level.time;
+    if (fact.value) fact.value.textContent = level.fact;
 };
 
 const toggleVisibility = () => {
-    const passwordInput = document.getElementById('password') as HTMLInputElement;
-    if (passwordInput.type === "password") {
-        passwordInput.type = "text";
+    if (!passwordInput.value) return;
+
+    if (passwordInput.value.type === "password") {
+        passwordInput.value.type = "text";
     } else {
-        passwordInput.type = "password";
+        passwordInput.value.type = "password";
     }
 };
 
 onMounted(() => {
-    (document.getElementById('password') as HTMLInputElement).addEventListener('input', checkPassword);
-    (document.querySelector('button[onclick="toggleVisibility()"]') as HTMLButtonElement).addEventListener('click', toggleVisibility);
+    if (passwordInput.value) {
+        passwordInput.value.addEventListener('input', checkPassword);
+    }
 });
 </script>
 
@@ -56,14 +66,14 @@ onMounted(() => {
         <label for="password" class="block mb-4">Testez votre mot de passe :</label>
         <div class="relative">
             <input
+                ref="passwordInput"
                 id="password"
                 type="password"
                 class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary"
-                oninput="checkPassword()"
                 placeholder="Entrez votre mot de passe..."
             />
             <div class="absolute top-1/2 right-4 transform -translate-y-1/2">
-                <button onclick="toggleVisibility()" class="text-gray-500 focus:outline-none">
+                <button @click="toggleVisibility" class="text-gray-500 focus:outline-none">
                     <svg
                         id="eye-icon"
                         xmlns="http://www.w3.org/2000/svg"
@@ -75,8 +85,8 @@ onMounted(() => {
                         stroke-linecap="round"
                         stroke-linejoin="round"
                     >
-                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z" />
-                        <circle cx="12" cy="12" r="3" />
+                        <path d="M1 12C3.2 7.6 7.6 4 12 4s8.8 3.6 11 8c-2.2 4.4-6.6 8-11 8s-8.8-3.6-11-8z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
                     </svg>
                 </button>
             </div>
@@ -84,13 +94,14 @@ onMounted(() => {
 
         <div class="w-full h-2 bg-gray-200 rounded-full mt-4">
             <div
+                ref="progressBar"
                 id="progress-bar"
                 class="h-2 bg-primary rounded-full transition-all duration-500"
                 style="width: 0%;"
             ></div>
         </div>
 
-        <div id="feedback" class="mt-8 p-6 border border-primary rounded-lg bg-blue-50 hidden">
+        <div ref="feedback" id="feedback" class="mt-8 p-6 border border-primary rounded-lg bg-blue-50 hidden">
             <h2 class="flex items-center gap-2 text-primary">✅ Bon mot de passe!</h2>
             <ul class="list-disc pl-5 mt-2">
                 <li>Votre mot de passe est résistant au piratage.</li>
@@ -100,8 +111,8 @@ onMounted(() => {
 
         <div class="mt-8 text-center">
             <p>Votre mot de passe peut être craqué avec un ordinateur de bureau standard en environ...</p>
-            <p id="crack-time" class="mt-2 text-primary font-bold text-2xl">-</p>
-            <p id="fact" class="mt-2">-</p>
+            <p ref="crackTime" id="crack-time" class="mt-2 text-primary font-bold text-2xl">-</p>
+            <p ref="fact" id="fact" class="mt-2">-</p>
         </div>
     </div>
 </template>
