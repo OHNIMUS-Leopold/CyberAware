@@ -88,7 +88,7 @@ function onInscr() {
 </script>
 
 <template>
-  <div class="mt-28 mb-20 max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
+  <main class="mb-20 max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
     <h1 class="mb-4 text-center">Authentification</h1>
     <p class="mb-4 text-red-500 text-center">{{ message }}</p>
     <div v-if="valeur !== 1" class="mb-4 text-center">
@@ -123,5 +123,5 @@ function onInscr() {
       </form>
     </div>
     <button v-if="valeur === 1" class="w-full bg-red-500 text-white p-2 rounded hover:bg-red-600" @click="onDcnx">Se déconnecter</button>
-  </div>
+  </main>
 </template>
