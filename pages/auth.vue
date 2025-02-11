@@ -105,7 +105,7 @@ function onInscr() {
         <input v-model="user.email" type="email" placeholder="Email" required class="w-full p-2 border border-gray-300 rounded" >
         <input id="password" v-model="user.password" type="password" placeholder="Mot de passe" required class="w-full p-2 border border-gray-300 rounded" >
         <button type="button" class="text-primary hover:underline" @click="togglePasswordVisibility">Afficher/Masquer le mot de passe</button>
-        <RoundedButton label="Se connecter" bgColor="bg-primary" class="hover:bg-blue-800" @click="onCnx" />
+        <RoundedButton label="Se connecter" bg-color="bg-primary" class="hover:bg-blue-800" @click="onCnx" />
       </form>
     </div>
     <div v-if="valeur !== 1 && authMode === 'register'" class="mb-4">
@@ -118,9 +118,9 @@ function onInscr() {
         <label class="flex items-center">
           <input v-model="user.isMod" type="checkbox" class="mr-2 bg-green-500" > Modérer les sessions
         </label>
-        <RoundedButton label="S'inscrire" bgColor="bg-green-500" class="hover:bg-green-600" @click="onInscr" />
+        <RoundedButton label="S'inscrire" bg-color="bg-green-500" class="hover:bg-green-600" @click="onInscr" />
       </form>
     </div>
-    <RoundedButton v-if="valeur === 1" label="Se déconnecter" bgColor="bg-red-500" class="hover:bg-red-600" @click="onDcnx" />
+    <RoundedButton v-if="valeur === 1" label="Se déconnecter" bg-color="bg-red-500" class="hover:bg-red-600" @click="onDcnx" />
   </main>
 </template>
