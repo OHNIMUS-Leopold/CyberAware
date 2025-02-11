@@ -1,8 +1,8 @@
 <template>
     <button
-        :class="['w-full', 'p-2', 'rounded', 'text-white', bgColor]"
+        :class="['w-full', 'p-2', 'rounded', 'text-white', props.bgColor]"
     >
-        {{ label }}
+        {{ props.label }}
     </button>
 </template>
 
