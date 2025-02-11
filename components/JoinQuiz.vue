@@ -1,10 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue';
 import { useFirebase } from '~/composables/useFirebase';
 import { doc, setDoc, getDoc, updateDoc, arrayUnion } from 'firebase/firestore';
 import type { AuthUser, UserData, QuizSession } from '~/types/firebase';
-import { useRouter } from 'vue-router';
-import RoundedButton from '~/components/RoundedButton.vue';
 
 const router = useRouter();
 const { $firebase: { db } } = useNuxtApp();
