@@ -1,75 +1,13 @@
-# Nuxt Minimal Starter
+# CyberAware
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+CyberAware est une application web développée avec Nuxt.js pour sensibiliser les utilisateurs à la cybersécurité. Elle propose des quiz interactifs, des jeux de mémoire et des informations sur les menaces et les bonnes pratiques en matière de sécurité en ligne.
 
-## Setup
+## Fonctionnalités
 
-Make sure to install dependencies:
-
-```bash
-# npm
-npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+- **Quiz interactif** : Testez vos connaissances en cybersécurité avec des questions à choix multiples.
+- **Jeu de mémoire** : Associez des termes et des définitions liés à la cybersécurité.
+- **Testeur de mot de passe** : Vérifiez la robustesse de vos mots de passe.
+- **Informations** : Découvrez les menaces courantes et les bonnes pratiques pour vous protéger en ligne.
+- **Authentification** : Inscription et connexion des utilisateurs avec Firebase.
+- **Création et participation à des sessions de quiz** : Les modérateurs peuvent créer des sessions de quiz et les utilisateurs peuvent les rejoindre.
+- **Signalement** : Signalez des incidents de cybersécurité via un lien national et un formulaire de contact.
